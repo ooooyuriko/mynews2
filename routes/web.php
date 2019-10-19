@@ -10,7 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//PHP/Laravel08 課題3
+//Route::group(['prefix' => 'XXX']),function(){
+//    Route::get('AAA Controller\bbb');
+//});
 
+//PHP/Latavel08 課題4
 Route::get('/', function () {
     return view('welcome');
 });
