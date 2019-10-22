@@ -31,3 +31,4 @@ Route::group(['prefix' => 'admin'], function() {
 Route::group(['prefix' => 'admin'], function() {
     Route::get('profile/edit', 'Admin\profileController@edit Action');
 });
+
