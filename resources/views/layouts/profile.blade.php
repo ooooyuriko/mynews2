@@ -20,10 +20,12 @@
         <link rel="dns-prefetch" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
-        <!-- Styles -->
-        {{-- php/laravel11 課題3 --}}
-        <link href="{{ secure_asset('css/profile.css') }}" rel="stylesheet">
-       
+       <!-- Styles -->
+       {{-- Laravel標準で用意されているCSSを読み込みます --}}
+       <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+       <!-- Styles -->
+       {{-- php/laravel11 課題3 --}}
+       <link href="{{ secure_asset('css/profile.css') }}" rel="stylesheet">
     </head>
     <body>
         <div id="app">
@@ -45,6 +47,31 @@
 
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
+                            <!-- Authentication Links -->
+                            {{-- ログインしていなかったらログイン画面へリンクを表示 --}}
+                            @guest
+                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                            {{-- ログインしていたらユーザー名とログアウトボタンを表示 --}}
+                            @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                            @endguest
+                            </li>
                         </ul>
                     </div>
                 </div>
