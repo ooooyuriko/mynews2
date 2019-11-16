@@ -16,41 +16,27 @@
 //});
 
 //PHP/Latavel09 課題4
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::group(['prefix' => 'admin'], function() {
-    Route::get('news/create', 'Admin\NewsController@add');
-     Route::get('profile/create', 'Admin\ProfileController@add');
-      Route::get('profile/edit', 'Admin\ProfileController@edit');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+// Route::group(['prefix' => 'admin'], function() {
+//     Route::get('news/create', 'Admin\NewsController@add');
+//      Route::get('profile/create', 'Admin\ProfileController@add');
+//       Route::get('profile/edit', 'Admin\ProfileController@edit');
+//});
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin'], function() {
     Route::get('news/create', 'Admin\NewsController@add')->middleware('auth');
-
+//    
     Route::get('profile/create', 'Admin\ProfileController@add')->middleware('auth');
-    
+    Route::post('profile/create', 'Admin\ProfileController@create')->middleware('auth');
     Route::get('profile/edit', 'Admin\ProfileController@edit')->middleware('auth');
-    
-    Route::post('news/create', 'Admin\NewsController@create');
-    
-    Route::post('profile/create', 'Admin\ProfileController@create');
-    
-    Route::post('profile/edit', 'Admin\ProfileController@updateAction');
+    Route::post('profile/edit', 'Admin\ProfileController@update')->middleware('auth');
 });
+
+Auth::routes();
